@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Görsel Programlama 1 | UniKod Notları</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">UniKod <span>| C# Notları</span></div>
+        <button id="theme-toggle" class="btn-theme">🌙 Tema Değiştir</button>
+    </nav>
+
+    <header class="hero">
+        <h1>Görsel Programlama 1 (Vize)</h1>
+        <p>C# Windows Forms Temel, Karar Yapıları, Döngüler ve Timer Kullanımı</p>
+    </header>
+
+    <main class="container" id="lessons-container">
+        <section class="lesson-card fade-in" id="lesson-1">
+            <h2>1. Temel Form İşlemleri ve Atamalar</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Label ve TextBox Kullanımı</h3>
+                    <p>Butona tıklandığında Label metnini doğrudan değiştirme veya TextBox'a girilen değeri Label'a aktarma işlemleri.</p>
+                </div>
+                <div class="code-box">
+<pre><code class="language-csharp">
+// Doğrudan Metin Atama
+private void button1_Click(object sender, EventArgs e) {
+    label1.Text = "Artuklu Üniversitesi";
+}
+
+// TextBox'tan Veri Çekme
+private void button1_Click(object sender, EventArgs e) {
+    string sehir;
+    sehir = textBox1.Text;
+    label1.Text = sehir;
+}
+</code></pre>
+                </div>
+            </div>
+            <div class="notes-section" data-lesson="csharp">
+            <h3>🌍 Global Ders Notları (C#)</h3>
+            <textarea class="note-input" placeholder="Bu ders hakkında diğer öğrencilerle bir not paylaş..."></textarea>
+            <button class="btn-theme submit-note-btn" onclick="addNote('csharp', this)">Gönder</button>
+            <div class="notes-list" id="notes-list-csharp">
+                </div>
+        </div>
+        </section>
+
+        <section class="lesson-card fade-in" id="lesson-2">
+            <h2>2. Matematiksel İşlemler ve Tip Dönüşümleri</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Dört İşlem Hesap Makinesi</h3>
+                    <p>Kullanıcıdan alınan metinsel veriler `Convert.ToInt16` veya `Convert.ToInt32` ile sayısal tiplere dönüştürülür.</p>
+                </div>
+                <div class="code-box">
+<pre><code class="language-csharp">
+private void button1_Click(object sender, EventArgs e) {
+    int sayi1, sayi2, toplam, fark, carpim, bolum;
+    sayi1 = Convert.ToInt16(textBox1.Text);
+    sayi2 = Convert.ToInt16(textBox2.Text);
+    
+    toplam = sayi1 + sayi2;
+    fark = sayi1 - sayi2;
+    carpim = sayi1 * sayi2;
+    bolum = sayi1 / sayi2;
+    
+    MessageBox.Show("Toplam : " + toplam + "\nFark : " + fark + "\nÇarpım : " + carpim + "\nBölüm : " + bolum);
+}
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-card fade-in" id="lesson-3">
+            <h2>3. Karar Yapıları (If - Else)</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Vize/Final Geçme Notu ve İndirim Hesaplama</h3>
+                    <p>Vizenin %30'u ve Finalin %70'i alınarak 60 puan üstü geçme durumu kontrol edilir. Diğer örnekte Tübitak dergisi için adet bazlı %20 veya %40 indirim uygulanır.</p>
+                </div>
+                <div class="code-box">
+<pre><code class="language-csharp">
+// Öğrenci Otomasyonu (Geçti/Kaldı)
+private void buttonHesapla_Click(object sender, EventArgs e) {
+    double vize, final, sonuc;
+    string durum;
+    vize = Convert.ToInt16(textBoxVize.Text);
+    final = Convert.ToInt16(textBoxFinal.Text);
+    sonuc = (vize * 3/10) + (final * 7/10);
+    
+    if (sonuc > 59) {
+        durum = "Geçti";
+    } else {
+        durum = "Kaldı";
+    }
+    textBoxSonuc.Text = sonuc.ToString() + " / " + durum;
+}
+
+// Dergi İndirim Hesaplama
+int Adet = Convert.ToInt16(textBoxAdet.Text);
+int fiyat = 25;
+double tutar;
+
+if(Adet >= 3 && Adet <= 20) {
+    tutar = (Adet * fiyat) - (Adet * fiyat * 0.2); // Yüzde 20 indirim
+} else {
+    tutar = (Adet * fiyat) - (Adet * fiyat * 0.4); // Yüzde 40 indirim
+}
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-card fade-in" id="lesson-4">
+            <h2>4. Koleksiyonlar: ListBox ve ComboBox</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Listelere Eleman Ekleme</h3>
+                    <p>Metin kutusundaki değerleri `Items.Add()` metodu ile listelere ekleme mantığı.</p>
+                </div>
+                <div class="code-box">
+<pre><code class="language-csharp">
+// Ortalama hesaplayıp ListBox'a ekleme
+ortalama = (not1 + not2) / 2;
+listBox1.Items.Add(adsoyad + " " + ortalama);
+
+// ComboBox'a yeni şehir ekleme
+private void buttonEkle_Click(object sender, EventArgs e) {
+    comboBoxSehir.Items.Add(textBoxSehir.Text);
+}
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-card fade-in" id="lesson-5">
+            <h2>5. Quiz Uygulaması Mantığı</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Küresel Değişkenler ve Görünürlük</h3>
+                    <p>Form yüklendiğinde butonları ve ikonları pasife çekip (`Visible = false`, `Enabled = false`), sayaçlara göre soruları ekrana getirme.</p>
+                </div>
+                <div class="code-box">
+<pre><code class="language-csharp">
+int soruNo = 0, dogru = 0, yanlis = 0;
+
+private void btnDogru_Click(object sender, EventArgs e) {
+    btnDogru.Enabled = false;
+    btnYanlis.Enabled = false;
+    btnSoru.Enabled = true;
+
+    if (btnDogru.Text == labelControl.Text) {
+        dogru++;
+        labelDogru.Text = dogru.ToString();
+        pictureBoxTrue.Visible = true;
+        pictureBoxFalse.Visible = false;
+    } else {
+        yanlis++;
+        labelYanlis.Text = yanlis.ToString();
+        pictureBoxFalse.Visible = true;
+        pictureBoxTrue.Visible = false;
+    }
+}
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-card fade-in" id="lesson-6">
+            <h2>6. Döngüler ve Zamanlayıcı (Timer)</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>For Döngüsü ve Tick Eventi</h3>
+                    <p>Mod alma (`%`) operatörü ile bölenleri bulma. Timer'ın `Tick` olayı kullanılarak değişken sayaçları üzerinden saat yapımı ve renk değiştirme işlemleri.</p>
+                </div>
+                <div class="code-box">
+<pre><code class="language-csharp">
+// Tam Bölenleri Bulma
+int sayi = Convert.ToInt16(textBox1.Text);
+for (int i = 1; i <= sayi; i++) {
+    if(sayi % i == 0) {
+        listBox1.Items.Add(i);
+    }
+}
+
+// Timer ile Dijital Saat
+int saat = 0, dakika = 0, saniye = 0;
+private void timer1_Tick(object sender, EventArgs e) {
+    saniye++;
+    label1.Text = saniye.ToString();
+    if (saniye == 60) {
+        dakika++;
+        label2.Text = dakika.ToString();
+        saniye = 0;
+        if (dakika == 60) {
+            saat++;
+            dakika = 0;
+        }
+    }
+}
+</code></pre>
+                </div>
+            </div>
+            <div class="notes-section" data-lesson="php">
+            <h3>🌍 Global Ders Notları (PHP)</h3>
+            <textarea class="note-input" placeholder="Bu ders hakkında diğer öğrencilerle bir not paylaş..."></textarea>
+            <button class="btn-theme submit-note-btn" onclick="addNote('php', this)">Gönder</button>
+            <div class="notes-list" id="notes-list-php">
+                </div>
+        </div>
+            <div class="quiz-app-container" data-quiz="csharp">
+    <h3>📝 Görsel Programlama 1 (25 Soru)</h3>
+    <div class="quiz-dynamic-content"></div>
+</div>
+        </section>
+        <section class="lesson-card fade-in" id="lesson-7">
+            <h2>7. İnternet Programcılığı ve PHP'ye Giriş</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Temel Kavramlar ve PHP</h3>
+                    <p><strong>Web:</strong> İnternet üzerinden erişilen sayfa ve uygulamalar.</p>
+                    <p><strong>Frontend (Ön Yüz):</strong> Kullanıcının gördüğü kısım (HTML, CSS, JS).</p>
+                    <p><strong>Backend (Arka Yüz):</strong> Sunucuda çalışan iş mantığı (PHP, MySQL).</p>
+                    <p><strong>PHP:</strong> Sunucu taraflı çalışan, dinamik sayfalar üreten dildir. Kodlar sunucuda yorumlanır, tarayıcıya HTML döner; kaynak kod görünmez.</p>
+                </div>
+                <div class="code-box">
+<pre><code class="language-php">
+// PHP Yazdırma Komutları
+&lt;?php
+    // echo bir tık daha hızlıdır
+    echo "Merhaba Dünya"; 
+    
+    // print başarılıysa 1 değerini döndürür
+    print "Artuklu Üniversitesi";
+?&gt;
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-card fade-in" id="lesson-8">
+            <h2>8. Değişkenler, Veri Tipleri ve Sabitler</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Değişken Kuralları ve Tipler</h3>
+                    <ul>
+                        <li>Her değişken `$` ile başlar.</li>
+                        <li>Rakamla başlayamaz, Türkçe karakter ve boşluk içeremez. Sadece `_` (alt tire) kullanılabilir.</li>
+                        <li>Büyük/küçük harf duyarlıdır (`$yas` ve `$Yas` farklıdır).</li>
+                    </ul>
+                    <p><strong>Sabitler:</strong> Değeri sonradan değiştirilemez. `define()` ile tanımlanır, başında `$` olmaz.</p>
+                </div>
+                <div class="code-box">
+<pre><code class="language-php">
+&lt;?php
+    // Değişken Tipleri
+    $tamSayi = 456;         // Integer
+    $ondalikli = 478.5;     // Float (Nokta ile yazılır!)
+    $metin = "Artuklu";     // String
+    $gunler[0] = "Pazartesi"; // Array (Dizi)
+    
+    // Sabit Tanımlama
+    define("pi", 3.14);
+    
+    // Değişken Birleştirme (.)
+    $ad = "Gökdeniz";
+    $soyad = "Altun";
+    echo $ad . " " . $soyad; // Çıktı: Gökdeniz Altun
+?&gt;
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-card fade-in" id="lesson-9">
+            <h2>9. Operatörler ve Kısa Koşul (Ternary)</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Operatör Mantığı</h3>
+                    <p><strong>Mod (%):</strong> Bölümden kalanı verir.</p>
+                    <p><strong>Mantıksal:</strong> `&&` (ve), `||` (veya), `!` (değil).</p>
+                    <p><strong>Arttırma:</strong> `++$a` (önce arttır, sonra yaz), `$a++` (önce yaz, sonra arttır).</p>
+                    <p><strong>Kısa Koşul:</strong> `koşul ? doğruysa_yap : yanlışsa_yap`</p>
+                </div>
+                <div class="code-box">
+<pre><code class="language-php">
+&lt;?php
+    $sayi = 15;
+    $kalan = $sayi % 4; // Kalan: 3
+    
+    // Kısa Koşul (Ternary Operator)
+    $not = 40;
+    $durum = ($not >= 50) ? "geçti" : "kaldı"; 
+    echo $durum; // Çıktı: kaldı
+    
+    // Arttırma Operatörü Farkı
+    $a = 8;
+    echo $a++; // Ekrana 8 yazar, a'yı 9 yapar.
+    
+    $b = 8;
+    echo ++$b; // a'yı 9 yapar, ekrana 9 yazar.
+?&gt;
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-card fade-in" id="lesson-10">
+            <h2>10. PHP Hazır Fonksiyonlar (Pratik Bilgiler)</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Değişkenleri Kontrol Etme</h3>
+                    <p><strong>gettype():</strong> Değişkenin türünü öğrenir (integer, string vs.).</p>
+                    <p><strong>settype():</strong> Değişkenin türünü dönüştürür.</p>
+                    <p><strong>isset():</strong> Değişken tanımlı mı ve içi dolu mu diye kontrol eder.</p>
+                    <p><strong>empty():</strong> Değişken boş mu diye bakar.</p>
+                    <p><strong>is_integer():</strong> Tam sayı kontrolü yapar.</p>
+                </div>
+                <div class="code-box">
+<pre><code class="language-php">
+&lt;?php
+    $metin = "Merhaba";
+    echo gettype($metin); // Çıktı: string
+    
+    $sayi = 10;
+    if(isset($sayi)) {
+        echo "Değişken tanımlı ve içi dolu.";
+    }
+?&gt;
+</code></pre>
+                </div>
+            </div>
+            <div class="quiz-app-container" data-quiz="php">
+    <h3>📝 İnternet Programcılığı (25 Soru)</h3>
+    <div class="quiz-dynamic-content"></div>
+</div>
+        </section>
+        <section class="lesson-card fade-in" id="lesson-11">
+            <h2>11. Bilgisayarın Tarihçesi ve Genel Yapısı</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Gelişim Evreleri ve Sınıflandırma</h3>
+                    <ul>
+                        <li><strong>Mekanik Dönem:</strong> Abaküs, Napier'in Kemikleri, Pascaline (1642), Kademeli Hesaplayıcı, Fark Motoru (Babbage).</li>
+                        <li><strong>İlk Elektronik Bilgisayarlar:</strong> ENIAC (İlk genel amaçlı, 1945), UNIVAC (İlk ticari, 1951), CSIRAC. Oda büyüklüğünde ve vakum tüplüydüler.</li>
+                        <li><strong>Modern Dönem:</strong> Transistörlerin ve mikroişlemcilerin icadı ile küçülen, ucuzlayan ve kişisel kullanıma (Mikro bilgisayar) uygun hale gelen cihazlar.</li>
+                    </ul>
+                    <p><strong>Bilgisayar Sınıfları:</strong> Mikro (Kişisel/PC), Mini (Çok kullanıcılı), Ana Bilgisayar (Mainframe - 100+ kullanıcı), Süper Bilgisayar (Yoğun veri işleme).</p>
+                </div>
+                <div class="code-box">
+                    <h3 style="color:var(--primary-color); margin-bottom:1rem;">Temel Donanım Mimarisi</h3>
+                    <p><strong>Giriş Birimleri:</strong> Klavye, Fare, Tarayıcı, Mikrofon, Grafik Tablet.</p>
+                    <p><strong>İşlem Birimi:</strong> Merkezi İşlem Birimi (CPU).</p>
+                    <p><strong>Çıkış Birimleri:</strong> Monitör, Yazıcı, Hoparlör, Kulaklık.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-card fade-in" id="lesson-12">
+            <h2>12. Anakartlar ve İşlemciler (CPU)</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Anakart (Motherboard)</h3>
+                    <p>Bileşenlerin birbiriyle iletişim kurmasını sağlayan merkezi yapıdır. Boyutları: Mini-ITX, Micro-ATX, ATX, E-ATX (Madencilik/Çoklu GPU için ideal).</p>
+                    <p><strong>Yonga Seti (Chipset):</strong> Kuzey Köprüsü (İşlemci, RAM, Ekran Kartı gibi hızlı birimler), Güney Köprüsü (Diğer çevre birimleri).</p>
+                    <p><strong>Veri Yolları:</strong> PCI-Express (Noktadan noktaya seri mimari kullanır, yüksek hızlıdır).</p>
+                </div>
+                <div class="code-box">
+                    <h3 style="color:var(--primary-color); margin-bottom:1rem;">İşlemci (CPU) Bileşenleri</h3>
+                    <ul>
+                        <li><strong>ALU (Aritmetik Mantık Birimi):</strong> Toplama, çıkarma, kaydırma, ve/veya/değil işlemlerini yapar.</li>
+                        <li><strong>Kontrol Birimi (CU):</strong> Getirme (Fetch), Kod Çözme (Decode) ve Yürütme (Execute) adımlarını yönetir.</li>
+                        <li><strong>İletişim Yolları:</strong> Adres Yolu, Veri Yolu (Datapath), Kontrol Yolu.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-card fade-in" id="lesson-13">
+            <h2>13. Bellek Hiyerarşisi</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Hıza ve CPU'ya Yakınlığa Göre Sıralama</h3>
+                    <ol>
+                        <li><strong>Kaydediciler (Registers):</strong> CPU içinde yer alır, en hızlı ve kapasitesi en düşük bellektir.</li>
+                        <li><strong>Önbellek (Cache):</strong> L1 (En hızlı), L2, L3 (En yavaş önbellek). CPU ile RAM arası uyumsuzluğu çözer.</li>
+                        <li><strong>Ana Bellek (Birincil):</strong> RAM (Geçici - SRAM ve DRAM) ve ROM (Kalıcı, salt okunur).</li>
+                        <li><strong>İkincil/Harici Bellek:</strong> Hard Disk (Manyetik), SSD (Katı hal, çok hızlı), Flash, Optik Disk.</li>
+                    </ol>
+                </div>
+                <div class="code-box">
+                    <h3 style="color:var(--primary-color); margin-bottom:1rem;">Kapasite Ölçü Birimleri</h3>
+<pre><code class="language-plaintext">
+1 Bit   = 0 veya 1 (En küçük birim)
+8 Bit   = 1 Byte (Bayt)
+1024 Byte = 1 KiloByte (KB)
+1024 KB   = 1 MegaByte (MB)
+1024 MB   = 1 GigaByte (GB)
+1024 GB   = 1 TeraByte (TB)
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-card fade-in" id="lesson-14">
+            <h2>14. Sayı Sistemleri ve Dönüşümler</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Onluk (Decimal) <-> İkilik (Binary)</h3>
+                    <p><strong>Onluktan İkiliye:</strong> Sayı sürekli 2'ye bölünür. Kalanlar sondan başa doğru yazılır.</p>
+                    <p><strong>İkiliden Onluğa:</strong> Sağdan sola doğru 2'nin kuvvetleri (2^0, 2^1, 2^2...) ile çarpılıp toplanır.</p>
+                    <hr style="margin: 1rem 0; border-color: var(--secondary-color); opacity: 0.3;">
+                    <h3>Sekizli (Octal) ve Onaltılı (Hex)</h3>
+                    <p>İkiliden Sekizliye: Sağdan sola <strong>3'erli</strong> gruplanır.</p>
+                    <p>İkiliden Onaltılıya: Sağdan sola <strong>4'erli</strong> gruplanır (10=A, 11=B, 12=C, 13=D, 14=E, 15=F).</p>
+                </div>
+                <div class="code-box">
+<pre><code class="language-plaintext">
+// Onaltılıdan İkiliye Dönüşüm Örneği:
+Sayı: 2A3C
+2 -> 0010
+A (10) -> 1010
+3 -> 0011
+C (12) -> 1100
+Sonuç: 0010 1010 0011 1100
+
+// İkiliden Sekizliye Dönüşüm Örneği:
+Sayı: 111101010
+(111) (101) (010)
+  7     5     2
+Sonuç: 752 (Sekizlik)
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-card fade-in" id="lesson-15">
+            <h2>15. İkili (Binary) Sistemde Dört İşlem</h2>
+            <div class="content-grid">
+                <div class="info-box">
+                    <h3>Toplama ve Çıkarma Kuralları</h3>
+                    <p><strong>Toplama:</strong> 0+0=0 | 0+1=1 | 1+0=1 | 1+1=10 (elde 1) | 1+1+1=11 (elde 1).</p>
+                    <p><strong>Çıkarma (2'ye Tümleyen Metodu):</strong> Bilgisayarların asıl kullandığı yöntemdir. Çıkarılacak sayının 1'leri 0, 0'ları 1 yapılır (Tersi alınır). Eksilen sayı ile toplanır ve sonuca 1 eklenir.</p>
+                </div>
+                <div class="code-box">
+<pre><code class="language-plaintext">
+// Çarpma Örneği (Onluk sistemle aynı mantık)
+   111
+ x 101
+ -----
+   111
+  000
++ 111
+------
+ 100011
+
+// 2'ye Tümleyen (2's Complement) Adımları:
+Sayılar: 1101 - 0101
+1. İkinci sayıyı ters çevir: 0101 -> 1010
+2. Topla: 1101 + 1010 = 10111
+3. Eldeyi at, kalana 1 ekle...
+</code></pre>
+                </div>
+            </div>
+            <div class="quiz-app-container" data-quiz="hardware">
+    <h3>📝 Bilgisayar Donanımı ve Sayı Sistemleri (25 Soru)</h3>
+    <div class="quiz-dynamic-content"></div>
+</div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Artuklu Uni ALTN</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+</html>
