@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(element);
     });
 });
+
 // --- 75 SORULUK DEV QUİZ VERİTABANI ---
 const quizData = {
     csharp: [
@@ -185,13 +186,15 @@ function checkDinamikAnswer(btn, selectedIndex, correctIndex, feedbackText) {
         buttons[correctIndex].style.opacity = '1';
     }
 }
+
 // --- SUPABASE GLOBAL NOT SİSTEMİ ---
 
 // DİKKAT: Kendi Supabase URL ve API Anahtarını buraya gir!
 const SUPABASE_URL = 'https://jjcutldbufhdeyiagfsi.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_ocW12Oypd4FAJR9qzR9-Wg_bF1mo-eC';
+const SUPABASE_ANON_KEY = 'sb_publishable_ocWl20ypd4FAJR9qzR9-Wg_bF1mo-eC';
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// İSİM ÇAKIŞMASINI ÖNLEMEK İÇİN ADINI "supabaseClient" YAPTIK
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // 1. Sayfa yüklendiğinde tüm not bölümlerini bul ve verileri Supabase'den çek
 document.addEventListener('DOMContentLoaded', () => {
@@ -217,8 +220,8 @@ async function addNote(lesson, buttonElement) {
     buttonElement.disabled = true;
     buttonElement.innerHTML = "Gönderiliyor... ⏳";
 
-    // Supabase veritabanına ekleme işlemi
-    const { data, error } = await supabase
+    // Supabase veritabanına ekleme işlemi (supabaseClient kullanıyoruz)
+    const { data, error } = await supabaseClient
         .from('notes')
         .insert([{ lesson: lesson, content: content }]);
 
@@ -242,7 +245,7 @@ async function getNotes(lesson) {
     listContainer.innerHTML = "<p style='color: var(--secondary-color);'>Notlar yükleniyor... 🔄</p>";
 
     // Supabase'den ilgili derse (lesson) ait notları tarihe göre (en yeni en üstte) çek
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
         .from('notes')
         .select('*')
         .eq('lesson', lesson)
