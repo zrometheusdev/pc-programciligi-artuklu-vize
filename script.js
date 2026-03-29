@@ -191,7 +191,7 @@ function checkDinamikAnswer(btn, selectedIndex, correctIndex, feedbackText) {
 
 // DİKKAT: Kendi Supabase URL ve API Anahtarını buraya gir!
 const SUPABASE_URL = 'https://jjcutldbufhdeyiagfsi.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_ocWl20ypd4FAJR9qzR9-Wg_bF1mo-eC';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpqY3V0bGRidWZoZGV5aWFnZnNpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4MDY3ODYsImV4cCI6MjA5MDM4Mjc4Nn0.y-Y4Ubs_5ZDCnRJVTv8i2JLleHdclVZ2tVzsbebhWSs';
 
 // İSİM ÇAKIŞMASINI ÖNLEMEK İÇİN ADINI "supabaseClient" YAPTIK
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
